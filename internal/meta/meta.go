@@ -15,8 +15,7 @@ type FileMeta struct {
 
 var (
 	fileMetas map[string]*FileMeta
-
-	lock sync.RWMutex
+	lock      sync.RWMutex
 )
 
 func init() {

@@ -1,17 +1,17 @@
 package main
 
 import (
-	"file-store/handler"
-	"net/http"
+	inittask "file-store/internal/init"
+	"file-store/internal/routes"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	http.HandleFunc("/file/upload", handler.UploadHandler)
-	http.HandleFunc("/file/download", handler.DownloadHandler)
-	http.HandleFunc("/file/upload", handler.UpdateHandler)
-	http.HandleFunc("/file/delete", handler.DeleteHandler)
+	inittask.InitTask()
 
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		panic(err)
-	}
+	r := gin.Default()
+	routes.InitRoutes(r)
+
+	r.Run(":8080")
 }
